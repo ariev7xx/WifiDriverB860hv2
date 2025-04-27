@@ -9,5 +9,5 @@ make boot using rufus/balena/Drufus(android)
 download *6.1.132_8189fs.ko* and copy/move to microsd bootable.
 boot to system as root.
 ```bash
-cp /boot/6.1.132_8189fs.ko /usr/lib/modules/6.1.132-ophub/kernel/drivers/net/wireless/8189fs.ko && depmod -a && modprope 8189fs
+cp /boot/6.1.132_8189fs.ko /usr/lib/modules/6.1.132-ophub/kernel/drivers/net/wireless/8189fs.ko && depmod -a && modprob 8189fs
 ```
