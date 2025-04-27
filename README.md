@@ -5,7 +5,7 @@ https://github.com/ophub/amlogic-s9xxx-armbian/releases
 
 make boot using rufus/balena/Drufus(android)
 
-**installation**
+# installation
 download *6.1.132_8189fs.ko* and copy/move to microsd bootable.
 boot to system as root.
 ```bash
