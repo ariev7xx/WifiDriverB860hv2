@@ -1,5 +1,5 @@
 # Driver Wifi B860h
-download firmware armbian and select kernel 6.1.132 version
+download firmware armbian and select kernel 6.1.xxx version
 
 https://github.com/ophub/amlogic-s9xxx-armbian/releases
 
