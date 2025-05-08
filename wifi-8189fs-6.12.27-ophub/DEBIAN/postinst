@@ -1,3 +1,3 @@
 #!/bin/bash
-depmod -a 6.1.132-ophub
+depmod -a 6.12.27-ophub
 modprobe 8189fs || echo "Gagal memuat modul 8189fs. Pastikan modul cocok dengan kernel."
