@@ -1,0 +1,7 @@
+Package: wifi-8189fs-6.1.132-ophub
+Version: 1.0
+Section: kernel
+Priority: optional
+Architecture: arm64
+Maintainer: ariev7xx <angel.ariev@gmail.com>
+Description: Realtek 8189FS WiFi driver untuk kernel 6.1.132-ophub (arm64)

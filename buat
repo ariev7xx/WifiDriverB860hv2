@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# ------ Konfigurasi Awal ------
+ARCH="arm64"
+MAINTAINER="ariev7xx <angel.ariev@gmail.com>"
+
+# ------ Cek Argumen ------
+if [ -z "$1" ]; then
+    echo "Penggunaan: $0 <versi-kernel> [nama-file-ko]"
+    echo "Contoh : $0 6.1.137-ophub rtl8189fs_custom.ko"
+    exit 1
+fi
+
+KERNEL_VERSION="$1"
+MODULE_SOURCE="${2:-8189fs.ko}"   # Default: 8189fs.ko
+MODULE_TARGET="8189fs.ko"
+PKG_NAME="wifi-8189fs-$KERNEL_VERSION"
+
+# ------ Cek File .ko ------
+if [ ! -f "$MODULE_SOURCE" ]; then
+    echo "File $MODULE_SOURCE tidak ditemukan!"
+    exit 1
+fi
+
+# ------ Bersihkan Build Lama ------
+rm -rf "$PKG_NAME"
+
+# ------ Buat Struktur Folder ------
+echo "Membuat struktur folder..."
+mkdir -p $PKG_NAME/DEBIAN
+mkdir -p $PKG_NAME/lib/modules/$KERNEL_VERSION/kernel/drivers/net/wireless
+
+# ------ Salin Modul ------
+cp "$MODULE_SOURCE" "$PKG_NAME/lib/modules/$KERNEL_VERSION/kernel/drivers/net/wireless/$MODULE_TARGET"
+
+# ------ File control ------
+cat <<EOF > $PKG_NAME/DEBIAN/control
+Package: $PKG_NAME
+Version: 1.0
+Section: kernel
+Priority: optional
+Architecture: $ARCH
+Maintainer: $MAINTAINER
+Description: Realtek 8189FS WiFi driver untuk kernel $KERNEL_VERSION ($ARCH)
+EOF
+
+# ------ File postinst ------
+cat <<EOF > $PKG_NAME/DEBIAN/postinst
+#!/bin/bash
+depmod -a $KERNEL_VERSION
+modprobe 8189fs || echo "Gagal memuat modul 8189fs. Pastikan modul cocok dengan kernel."
+EOF
+
+chmod 755 $PKG_NAME/DEBIAN/postinst
+
+# ------ Build Paket ------
+echo "Membangun paket .deb..."
+dpkg-deb --build "$PKG_NAME"
+
+echo "Selesai. File dihasilkan: $PKG_NAME.deb"
