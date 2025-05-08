@@ -6,11 +6,10 @@ https://github.com/ophub/amlogic-s9xxx-armbian/releases
 make boot using rufus/balena/Drufus(android)
 
 # installation
-download *6.x.xxx-8189fs.ko* and copy/move to microsd bootable.
+download *wifi-8189fs-xxx.deb* and copy/move to microsd bootable.
 boot to system as root.
 ```bash
-cp /boot/6.*-8189fs.ko /usr/lib/modules/6.*-ophub/kernel/drivers/net/wireless/8189fs.ko && depmod -a && modprobe 8189fs
-```
+dpkg -i /boot/*.deb```
 
 **disable ipv6**
 ```bash
