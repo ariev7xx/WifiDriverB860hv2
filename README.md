@@ -9,7 +9,8 @@ make boot using rufus/balena/Drufus(android)
 download *wifi-8189fs-xxx.deb* and copy/move to microsd bootable.
 boot to system as root.
 ```bash
-dpkg -i /boot/*.deb```
+dpkg -i /boot/*.deb
+```
 
 **disable ipv6**
 ```bash
